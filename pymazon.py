@@ -5,7 +5,7 @@ from requests_html import HTMLSession
 
 session = HTMLSession()
 header = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.137 Safari/537.36 Vivaldi/2.7.1628.33',
     'Cookie': 'sp-cdn="L5Z9:UY"'
 }
 
@@ -16,7 +16,7 @@ def product_data(product_id):
     try:
         product_name = product_response.html.find('#productTitle', first=True).text
         try:
-            price = float(product_response.html.find('.a-size-base.a-color-base')[0].text[1:])
+            price = float(product_response.html.find('#price_block_ourprice', first=True).text[1:])
             shipping = float(product_response.html.find('.a-size-base.a-color-base')[1].text[1:])
             taxes = float(product_response.html.find('.a-size-base.a-color-base')[2].text[1:])
             tax_percentage = int(round(taxes / price * 100, 0))
